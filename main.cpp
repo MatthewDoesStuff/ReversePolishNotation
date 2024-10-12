@@ -9,13 +9,12 @@ public:
     RPN()=default;
     ~RPN()=default;
 
-    double deTing(const std::string& data)
+    double calculate(const std::string& data)
     {
-        char c{};
         std::vector<std::string> splitData{split(data, ' ')};
         for(const auto& v : splitData) {
             if(isOperator(v)) {
-                c=v[0];
+                char c=v[0];
                 calculate(c);
             }
             else {
@@ -66,7 +65,7 @@ private:
         stack.pop();
         const double y{stack.top()};
         stack.pop();
-        stack.push(x-y);
+        stack.push(y-x);
     }
 
     void multiply() {
@@ -110,6 +109,6 @@ private:
 
 int main() {
     RPN rpn;
-    std::cout<<rpn.deTing("4 3 1 - 2 3 * ^ /");
+    std::cout<<rpn.calculate("4 3 1 - 2 3 * ^ /");
     return 0;
 }
